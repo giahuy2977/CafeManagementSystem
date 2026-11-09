@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CafeManagementSystem.Views"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="500" Width="600">
+        Title="LoginWindow" Height="500" Width="600"
+        Background="{StaticResource SurfaceCardBrush}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -39,7 +40,7 @@
                    Grid.Row="5"></TextBlock>
         
         <!--Button & forgot Password-->
-        <Button Content="Login"
+        <Button Content="Login" Style="{StaticResource PrimaryButtonStyle}"
                 Grid.Row="6"></Button>
         <TextBlock Text="Forgot Password ?"
                    Grid.Row="7"></TextBlock>

@@ -5,8 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CafeManagementSystem.Views.UserControls"
         mc:Ignorable="d"
-        Title="RevenueView" Height="450" Width="800">
-    <Grid>
+        Title="RevenueView" Height="720" Width="1080"
+        FontFamily="Be Vietnam Pro, Segoe UI">
+    
+    <!-- Định nghĩa background ban đầu-->
+    <Grid Background="{StaticResource AppBackgroundBrush}" Margin="16">
         
+        <!-- Chia bố cục -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- ================================================================ -->   
+        <!-- ROW 0: HEADER VÀ BỘ LỌC THỜI GIAN -->
+        <!-- ================================================================ -->
+        
+        <!-- Tiêu đề view -->
+        <Border Grid.Row="0"
+                Margin="0, 0, 0, 16">
+            <DockPanel Grid.Row="0">
+                <Button Content="Refresh"
+            Style="{StaticResource PrimaryButtonStyle}"
+            Width="100"
+            DockPanel.Dock="Right"></Button>
+                <TextBlock Text="Báo cáo doanh thu &amp; Thống kê"
+            Foreground="{StaticResource TextPrimaryBrush}"
+            FontSize="20"
+            FontWeight="Bold"
+            VerticalAlignment="Center"></TextBlock>
+            </DockPanel>
+        </Border>
+        <!-- Bộ lọc thời gian-->
+        <Border Grid.Row="1" 
+                Style="{StaticResource FlatCardBorderStyle}"
+                Background="{StaticResource AccentBrush}"
+                Margin="0, 0, 0, 16">
+            <WrapPanel>
+                <!-- Từ ngày :-->
+                <TextBlock Text="Từ ngày:"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="14"
+                               Margin="0, 0, 8, 0"
+                               VerticalAlignment="Center"></TextBlock>
+                <DatePicker SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"
+                                Width="140" Height="40" 
+                                VerticalContentAlignment="Center"
+                                BorderBrush="{StaticResource BorderBrushDefault}"
+                                Background="{StaticResource SurfaceCardBrush}"
+                                Margin="0, 0, 8, 0"></DatePicker>
+
+                <!-- Đến ngày : -->
+                <TextBlock Text="Đến ngày:"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               FontSize="14"
+                               Margin="0, 0, 8, 0"
+                               VerticalAlignment="center"></TextBlock>
+                <DatePicker SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"
+                                Width="140" Height="40" 
+                                VerticalContentAlignment="Center"
+                                BorderBrush="{StaticResource BorderBrushDefault}"
+                                Background="{StaticResource SurfaceCardBrush}"
+                                Margin="0, 0, 8, 0"></DatePicker>
+                <!-- Button -->
+                <Button Content="Filter"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Width="100"></Button>
+            </WrapPanel>
+        </Border>
+
+
     </Grid>
 </Window>
