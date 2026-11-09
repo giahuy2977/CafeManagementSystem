@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CafeManagementSystem.Views"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
+        Title="LoginWindow" Height="500" Width="600">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Header-->
+        <TextBlock Text="login"
+                   Grid.Row="0"></TextBlock>
+        
+        <!--Username-->
+        <TextBlock Text="Username"
+                   Grid.Row="1"></TextBlock>
+        <TextBox Name="tbUsername"
+                 Grid.Row="2"></TextBox>
+        
+        <!--Password-->
+        <TextBlock Text="Password"
+                   Grid.Row="3"></TextBlock>
+        <TextBox Name="tbPassword"
+                 Grid.Row="4"></TextBox>
+        
+        <!--Notification-->
+        <TextBlock Text="Notification"
+                   Grid.Row="5"></TextBlock>
+        
+        <!--Button & forgot Password-->
+        <Button Content="Login"
+                Grid.Row="6"></Button>
+        <TextBlock Text="Forgot Password ?"
+                   Grid.Row="7"></TextBlock>
+        
         
     </Grid>
 </Window>
