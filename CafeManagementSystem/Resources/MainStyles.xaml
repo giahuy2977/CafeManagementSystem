@@ -74,4 +74,44 @@
         <Setter Property="Foreground" Value="{StaticResource StatusErrBrush}" />
     </Style>
 
+    <!-- Style hộp thoại ngày tháng -->
+    <Style x:Key="ModernDatePicker" TargetType="{x:Type DatePicker}">
+        <Setter Property="Height" Value="42"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="#333333"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DatePicker}">
+                    <Border x:Name="Root" Background="White" CornerRadius="8" Padding="12,0,10,0">
+                        <Grid x:Name="PART_Root" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <DatePickerTextBox x:Name="PART_TextBox" Grid.Column="0" VerticalAlignment="Center"
+                                           Background="Transparent" Foreground="{TemplateBinding Foreground}">
+                                <DatePickerTextBox.Template>
+                                    <ControlTemplate TargetType="{x:Type DatePickerTextBox}">
+                                        <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                                    </ControlTemplate>
+                                </DatePickerTextBox.Template>
+                            </DatePickerTextBox>
+                            <Button x:Name="PART_Button" Grid.Column="1" Focusable="False" Cursor="Hand">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="18"
+                                               Foreground="#4E3B31" Background="Transparent" VerticalAlignment="Center"/>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom"
+                               PlacementTarget="{Binding ElementName=Root}" StaysOpen="False"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 </ResourceDictionary>

@@ -8,73 +8,164 @@
         Title="RevenueView" Height="720" Width="1080"
         FontFamily="Be Vietnam Pro, Segoe UI">
     
+    <!-- Style chung cho RevenueView-->
+    <Window.Resources>
+        <!-- Style dùng chung cho DataGrid phẳng trong RevenueView -->
+        <Style x:Key="FlatDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource SurfaceCardBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="8,8" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushDefault}" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+        </Style>
+
+        <Style x:Key="FlatDataGridCellStyle" TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="8,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource TintBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    
     <!-- Định nghĩa background ban đầu-->
-    <Grid Background="{StaticResource AppBackgroundBrush}" Margin="16">
+    <Grid Background="{StaticResource AppBackgroundBrush}">
         
         <!-- Chia bố cục -->
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- ================================================================ -->   
-        <!-- ROW 0: HEADER VÀ BỘ LỌC THỜI GIAN -->
+        <!-- ROW 0: HEADER -->
         <!-- ================================================================ -->
         
         <!-- Tiêu đề view -->
-        <Border Grid.Row="0"
-                Margin="0, 0, 0, 16">
-            <DockPanel Grid.Row="0">
-                <Button Content="Refresh"
-            Style="{StaticResource PrimaryButtonStyle}"
-            Width="100"
-            DockPanel.Dock="Right"></Button>
-                <TextBlock Text="Báo cáo doanh thu &amp; Thống kê"
-            Foreground="{StaticResource TextPrimaryBrush}"
-            FontSize="20"
-            FontWeight="Bold"
-            VerticalAlignment="Center"></TextBlock>
-            </DockPanel>
-        </Border>
+        <DockPanel Grid.Row="0" Margin="16, 4">
+            <Button Content="Làm mới"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Width="100"
+                    DockPanel.Dock="Right"></Button>
+            <TextBlock Text="Báo cáo doanh thu &amp; Thống kê"
+                    Foreground="{StaticResource TextPrimaryBrush}"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"></TextBlock>
+        </DockPanel>
+
+        <!-- ================================================================ -->
+        <!-- ROW 1: BỘ LỌC THỜI GIAN -->
+        <!-- ================================================================ -->
+        
         <!-- Bộ lọc thời gian-->
-        <Border Grid.Row="1" 
+        <Border Grid.Row="1" Padding="10"
                 Style="{StaticResource FlatCardBorderStyle}"
-                Background="{StaticResource AccentBrush}"
-                Margin="0, 0, 0, 16">
+                Background="{StaticResource BorderBrushDefault}"
+                Margin="16, 4">
             <WrapPanel>
                 <!-- Từ ngày :-->
                 <TextBlock Text="Từ ngày:"
-                               Foreground="{StaticResource TextSecondaryBrush}"
-                               FontSize="14"
-                               Margin="0, 0, 8, 0"
-                               VerticalAlignment="Center"></TextBlock>
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           FontSize="14"
+                           Margin="0, 0, 8, 0"
+                           VerticalAlignment="Center"></TextBlock>
                 <DatePicker SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"
-                                Width="140" Height="40" 
-                                VerticalContentAlignment="Center"
-                                BorderBrush="{StaticResource BorderBrushDefault}"
-                                Background="{StaticResource SurfaceCardBrush}"
-                                Margin="0, 0, 8, 0"></DatePicker>
+                            Width="140"
+                            VerticalContentAlignment="Center"
+                            BorderBrush="{StaticResource BorderBrushDefault}"
+                            Background="{StaticResource SurfaceCardBrush}"
+                            Style="{StaticResource ModernDatePicker}"
+                            Margin="0, 0, 8, 0"></DatePicker>
 
                 <!-- Đến ngày : -->
                 <TextBlock Text="Đến ngày:"
-                               Foreground="{StaticResource TextSecondaryBrush}"
-                               FontSize="14"
-                               Margin="0, 0, 8, 0"
-                               VerticalAlignment="center"></TextBlock>
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           FontSize="14"
+                           Margin="0, 0, 8, 0"
+                           VerticalAlignment="center"></TextBlock>
                 <DatePicker SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"
-                                Width="140" Height="40" 
-                                VerticalContentAlignment="Center"
-                                BorderBrush="{StaticResource BorderBrushDefault}"
-                                Background="{StaticResource SurfaceCardBrush}"
-                                Margin="0, 0, 8, 0"></DatePicker>
+                            Width="140" 
+                            VerticalContentAlignment="Center"
+                            BorderBrush="{StaticResource BorderBrushDefault}"
+                            Background="{StaticResource SurfaceCardBrush}"
+                            Style="{StaticResource ModernDatePicker}"
+                            Margin="0, 0, 8, 0"></DatePicker>
                 <!-- Button -->
-                <Button Content="Filter"
-                            Style="{StaticResource PrimaryButtonStyle}"
-                            Width="100"></Button>
+                <Button Content="Lọc dữ liệu"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Width="100"></Button>
             </WrapPanel>
         </Border>
 
+        <!-- ================================================================ -->
+        <!-- ROW 2: THẺ KPI DOANH THU -->
+        <!-- ================================================================ -->
 
+        <UniformGrid Grid.Row="2" Columns="4" Margin="16, 4">
+            
+            <!-- Ô 1 : Tổng doanh thu trong khoảng thời gian -->
+            <Border Style="{StaticResource FlatCardBorderStyle}"
+                    Margin="5, 0" Padding="5">
+                <TextBlock Text="Tổng doanh thu"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"></TextBlock>    
+            </Border>
+            
+            <!-- Ô 2 : Trung bình doanh thu mỗi ngày -->
+            <Border Style="{StaticResource FlatCardBorderStyle}"
+                    Margin="5, 0" Padding="5">
+                <TextBlock Text="Doanh thu mỗi ngày"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            
+            <!-- Ô 3 : Tổng số hóa đơn hoàn tất trong thời gian được chọn -->
+            <Border Style="{StaticResource FlatCardBorderStyle}"
+                    Margin="5, 0" Padding="5">
+                <TextBlock Text="Tổng số hóa đơn"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            
+            <!-- Ô 4 : Tổng số sản phẩm đã được bán trong thời gian được chọn -->
+            <Border Style="{StaticResource FlatCardBorderStyle}"
+                    Margin="5, 0" Padding="5">
+                <TextBlock Text="Tổng số sản phẩm"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"></TextBlock>
+            </Border>
+
+        </UniformGrid>
+        
     </Grid>
 </Window>
