@@ -53,5 +53,8 @@
     <!-- Bàn trống (Xanh trầm) -->
     <SolidColorBrush x:Key="TableOccupiedBrush" Color="#1A1A1A" />
     <!-- Bàn có khách (Đen Ink) -->
-
+    
+    <!--6. Màu đặc thù cho bộ icon Revenue-->
+    <SolidColorBrush x:Key="IconPrimaryBrush" Color="#33201A" />
+    <SolidColorBrush x:Key="IconSecondaryBrush" Color="#FFDAA520" />
 </ResourceDictionary>

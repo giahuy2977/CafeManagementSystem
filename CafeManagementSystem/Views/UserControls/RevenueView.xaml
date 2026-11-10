@@ -79,7 +79,7 @@
         <Border Grid.Row="1" Padding="10"
                 Style="{StaticResource FlatCardBorderStyle}"
                 Background="{StaticResource BorderBrushDefault}"
-                Margin="16, 4">
+                Margin="20, 10">
             <WrapPanel>
                 <!-- Từ ngày :-->
                 <TextBlock Text="Từ ngày:"
@@ -119,53 +119,138 @@
         <!-- ROW 2: THẺ KPI DOANH THU -->
         <!-- ================================================================ -->
 
-        <UniformGrid Grid.Row="2" Columns="4" Margin="16, 4">
+        <UniformGrid Grid.Row="2" Columns="4" Margin="10, 10">
             
             <!-- Ô 1 : Tổng doanh thu trong khoảng thời gian -->
             <Border Style="{StaticResource FlatCardBorderStyle}"
-                    Margin="5, 0" Padding="5">
-                <TextBlock Text="Tổng doanh thu"
-                           Foreground="{StaticResource TextPrimaryBrush}"
-                           FontSize="16"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"></TextBlock>    
+                    Margin="10, 0" Padding="5">
+                <StackPanel>
+                    <WrapPanel Margin="0,8">
+                        <Path Data="{StaticResource IconTodayRevenue}"
+                              Fill="{StaticResource IconPrimaryBrush}"
+                              Margin="8, 0"
+                              ></Path>
+                        <TextBlock Text="Tổng doanh thu"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </WrapPanel>
+                    
+                    <WrapPanel Margin="0, 0, 0, 20">
+                        <TextBlock Text="$0" 
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   Margin="10, 0"></TextBlock>
+                        <Path Data="{StaticResource IconMiniChart}"
+                              Fill="{StaticResource IconSecondaryBrush}"
+                              Stretch="Uniform" Width="40"
+                              ></Path>
+                    </WrapPanel>
+                </StackPanel>
             </Border>
             
             <!-- Ô 2 : Trung bình doanh thu mỗi ngày -->
             <Border Style="{StaticResource FlatCardBorderStyle}"
-                    Margin="5, 0" Padding="5">
-                <TextBlock Text="Doanh thu mỗi ngày"
-                           Foreground="{StaticResource TextPrimaryBrush}"
-                           FontSize="16"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"></TextBlock>
+                    Margin="10, 0" Padding="5">
+                <StackPanel>
+                    <WrapPanel Margin="0, 8">
+                        <Path Data="{StaticResource IconPeriodRevenue}"
+                              Fill="{StaticResource IconSecondaryBrush}"
+                              Margin="8, 0"></Path>
+                        <TextBlock Text="Doanh thu mỗi ngày"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </WrapPanel>
+                    <TextBlock Text="$0"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Margin="10, 0"></TextBlock>
+                </StackPanel>
             </Border>
             
             <!-- Ô 3 : Tổng số hóa đơn hoàn tất trong thời gian được chọn -->
             <Border Style="{StaticResource FlatCardBorderStyle}"
-                    Margin="5, 0" Padding="5">
-                <TextBlock Text="Tổng số hóa đơn"
-                           Foreground="{StaticResource TextPrimaryBrush}"
-                           FontSize="16"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"></TextBlock>
+                    Margin="10, 0" Padding="5">
+                <StackPanel>
+                    <WrapPanel Margin="0, 8">
+                        <Path Data="{StaticResource IconCompletedOrders}"
+                              Fill="{StaticResource IconPrimaryBrush}"
+                              Margin="8, 0"></Path>
+                        <TextBlock Text="Tổng số hóa đơn"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </WrapPanel>
+                    <TextBlock Text="0"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Margin="10, 0"></TextBlock>
+                </StackPanel>
             </Border>
             
             <!-- Ô 4 : Tổng số sản phẩm đã được bán trong thời gian được chọn -->
             <Border Style="{StaticResource FlatCardBorderStyle}"
-                    Margin="5, 0" Padding="5">
-                <TextBlock Text="Tổng số sản phẩm"
-                           Foreground="{StaticResource TextPrimaryBrush}"
-                           FontSize="16"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"></TextBlock>
+                    Margin="10, 0" Padding="5">
+                <StackPanel>
+                    <WrapPanel Margin="0, 8">
+                        <Path Data="{StaticResource IconItemsSold}"
+                              Fill="{StaticResource IconSecondaryBrush}"
+                              Margin="8, 0"></Path>
+                        <TextBlock Text="Tổng số sản phẩm"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"></TextBlock>
+                    </WrapPanel>
+                    <TextBlock Text="0"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Margin="10, 0"></TextBlock>
+                </StackPanel>
             </Border>
-
         </UniformGrid>
+
+        <!-- ====================================================================== -->
+        <!-- ROW 3: BẢNG THỐNG KÊ SONG SONG (TOP MÓN VÀ DANH SÁCH HÓA ĐƠN HOÀN TẤT) -->
+        <!-- ====================================================================== -->
+
+        <Grid Grid.Row="3" Margin="20, 10, 40, 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!-- Top các sản phẩm bán chạy || BẢNG PHÍA BÊN TRÁI -->
+            <Border Style="{StaticResource FlatCardBorderStyle}"
+                    Padding="0" Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Top sản phẩm bán chạy"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="20"
+                               FontWeight="Bold"></TextBlock>
+                </Grid>
+                
+                
+            </Border>
+            
+        </Grid>
         
     </Grid>
 </Window>

@@ -113,5 +113,22 @@
         </Setter>
     </Style>
 
+    <!-- Style bộ icon của ô kpi doanh thu sử dụng trong RevenueView-->
+    
+    <!-- 1. Icon Today Revenue (Đồng xu $) -->
+    <StreamGeometry x:Key="IconTodayRevenue">M12,2A10,10 0 1,0 22,12A10,10 0 0,0 12,2M13,17.93V19H11V17.93C9.61,17.69 8.5,16.5 8.5,15H10.5C10.5,15.83 11.17,16.5 12,16.5C12.83,16.5 13.5,15.83 13.5,15C13.5,14.17 12.83,13.5 11.75,13.21C9.97,12.76 8.5,11.78 8.5,10C8.5,8.5 9.61,7.31 11,7.07V6H13V7.07C14.39,7.31 15.5,8.5 15.5,10H13.5C13.5,9.17 12.83,8.5 12,8.5C11.17,8.5 10.5,9.17 10.5,10C10.5,10.83 11.17,11.39 12.25,11.68C14.03,12.13 15.5,13.11 15.5,15C15.5,16.5 14.39,17.69 13,17.93Z</StreamGeometry>
+
+    <!-- 2. Icon Period Revenue (Lịch viền mảnh) -->
+    <StreamGeometry x:Key="IconPeriodRevenue">M19,4H18V2H16V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V10H19V20M19,8H5V6H19V8M7,13H9V15H7V13M7,16H9V18H7V16Z</StreamGeometry>
+
+    <!-- 3. Icon Completed Orders (Hóa đơn răng cưa) -->
+    <StreamGeometry x:Key="IconCompletedOrders">M5,2H19A1,1 0 0,1 20,3V21.5L17.5,19.5L15,21.5L12,19.5L9,21.5L6.5,19.5L4,21.5V3A1,1 0 0,1 5,2M6,4V17.6L6.5,17.2L9,19.2L12,17.2L15,19.2L17.5,17.2L18,17.6V4H6M8,7H16V9H8V7M8,11H14V13H8V11Z</StreamGeometry>
+
+    <!-- 4. Icon Total Items Sold (Áo thun / Sản phẩm) -->
+    <StreamGeometry x:Key="IconItemsSold">M16,21H8A1,1 0 0,1 7,20V12.07L5.7,13A1,1 0 0,1 4.29,12.82L1.46,9.14A1,1 0 0,1 1.64,7.73L6.68,3.8C7.17,3.41 7.77,3.2 8.4,3.2H10C10.3,4.4 11.1,5.2 12,5.2C12.9,5.2 13.7,4.4 14,3.2H15.6C16.23,3.2 16.83,3.41 17.32,3.8L22.36,7.73A1,1 0 0,1 22.54,9.14L19.71,12.82A1,1 0 0,1 18.3,13L17,12.07V20A1,1 0 0,1 16,21M9,19H15V9.54L18.18,11.96L20.14,9.41L16.1,6.25H15.22C14.5,7.38 13.34,8.2 12,8.2C10.66,8.2 9.5,7.38 8.78,6.08H7.9L3.86,9.41L5.82,11.96L9,9.54V19Z</StreamGeometry>
+
+    <!-- 5. Icon Biểu đồ miền nhỏ cho tổng doanh thu -->
+    <StreamGeometry x:Key="IconMiniChart">M2,18L8,12L13,14.5L22,8V18H2Z</StreamGeometry>
+    
 
 </ResourceDictionary>
