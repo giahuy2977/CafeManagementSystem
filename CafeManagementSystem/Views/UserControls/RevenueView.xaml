@@ -7,45 +7,10 @@
         mc:Ignorable="d"
         Title="RevenueView" Height="720" Width="1080"
         FontFamily="Be Vietnam Pro, Segoe UI">
-    
-    <!-- Style chung cho RevenueView-->
-    <Window.Resources>
-        <!-- Style dùng chung cho DataGrid phẳng trong RevenueView -->
-        <Style x:Key="FlatDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="{StaticResource SurfaceCardBrush}" />
-            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Padding" Value="8,8" />
-            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushDefault}" />
-            <Setter Property="BorderThickness" Value="0,0,0,1" />
-        </Style>
 
-        <Style x:Key="FlatDataGridCellStyle" TargetType="DataGridCell">
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Padding" Value="8,0" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="DataGridCell">
-                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
-                            <ContentPresenter VerticalAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{StaticResource TintBrush}" />
-                    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
-    
-    
     <!-- Định nghĩa background ban đầu-->
     <Grid Background="{StaticResource AppBackgroundBrush}">
-        
+
         <!-- Chia bố cục -->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -54,10 +19,10 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!-- ================================================================ -->   
+        <!-- ================================================================ -->
         <!-- ROW 0: HEADER -->
         <!-- ================================================================ -->
-        
+
         <!-- Tiêu đề view -->
         <DockPanel Grid.Row="0" Margin="16, 4">
             <Button Content="Làm mới"
@@ -74,7 +39,7 @@
         <!-- ================================================================ -->
         <!-- ROW 1: BỘ LỌC THỜI GIAN -->
         <!-- ================================================================ -->
-        
+
         <!-- Bộ lọc thời gian-->
         <Border Grid.Row="1" Padding="10"
                 Style="{StaticResource FlatCardBorderStyle}"
@@ -120,7 +85,7 @@
         <!-- ================================================================ -->
 
         <UniformGrid Grid.Row="2" Columns="4" Margin="10, 10">
-            
+
             <!-- Ô 1 : Tổng doanh thu trong khoảng thời gian -->
             <Border Style="{StaticResource FlatCardBorderStyle}"
                     Margin="10, 0" Padding="5">
@@ -136,7 +101,7 @@
                                    FontWeight="Bold"
                                    VerticalAlignment="Center"></TextBlock>
                     </WrapPanel>
-                    
+
                     <WrapPanel Margin="0, 0, 0, 20">
                         <TextBlock Text="$0" 
                                    Foreground="{StaticResource TextPrimaryBrush}"
@@ -151,7 +116,7 @@
                     </WrapPanel>
                 </StackPanel>
             </Border>
-            
+
             <!-- Ô 2 : Trung bình doanh thu mỗi ngày -->
             <Border Style="{StaticResource FlatCardBorderStyle}"
                     Margin="10, 0" Padding="5">
@@ -174,7 +139,7 @@
                                Margin="10, 0"></TextBlock>
                 </StackPanel>
             </Border>
-            
+
             <!-- Ô 3 : Tổng số hóa đơn hoàn tất trong thời gian được chọn -->
             <Border Style="{StaticResource FlatCardBorderStyle}"
                     Margin="10, 0" Padding="5">
@@ -197,7 +162,7 @@
                                Margin="10, 0"></TextBlock>
                 </StackPanel>
             </Border>
-            
+
             <!-- Ô 4 : Tổng số sản phẩm đã được bán trong thời gian được chọn -->
             <Border Style="{StaticResource FlatCardBorderStyle}"
                     Margin="10, 0" Padding="5">
@@ -226,31 +191,91 @@
         <!-- ROW 3: BẢNG THỐNG KÊ SONG SONG (TOP MÓN VÀ DANH SÁCH HÓA ĐƠN HOÀN TẤT) -->
         <!-- ====================================================================== -->
 
-        <Grid Grid.Row="3" Margin="20, 10, 40, 20">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <!-- Top các sản phẩm bán chạy || BẢNG PHÍA BÊN TRÁI -->
             <Border Style="{StaticResource FlatCardBorderStyle}"
-                    Padding="0" Grid.Column="0">
+                        Padding="0" Grid.Column="0"
+                        Margin="20, 10, 10, 20">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
-
+                    <!-- Tiêu đề bảng -->
                     <TextBlock Text="Top sản phẩm bán chạy"
+                                   Grid.Row="0"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   FontSize="20"
+                                   FontWeight="DemiBold"
+                                   Margin="10"></TextBlock>
+                    <!-- Bảng -->
+                    <DataGrid Grid.Row="1"
+                                  ItemsSource="{Binding TopProducts}"
+                                  Style="{StaticResource FlatDataGridStyle}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="#"
+                                                    Binding="{Binding Rank, StringFormat='{}{0}.'}"
+                                                    Width="44" />
+                            <DataGridTextColumn Header="Tên Món"
+                                                    Binding="{Binding ProductName}"
+                                                    Width="2.2*" />
+                            <DataGridTextColumn Header="SL Bán"
+                                                    Binding="{Binding TotalQuantitySold, StringFormat={}{0:N0}}"
+                                                    Width="1*" />
+                            <DataGridTextColumn Header="Doanh Thu"
+                                                    Binding="{Binding TotalProductRevenue, StringFormat={}{0:N0}đ}"
+                                                    ElementStyle="{StaticResource CurrencyColumnTextStyle}"
+                                                    Width="1.3*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+            <!-- Danh sách các hóa đơn hoàn tất -->
+            <Border Style="{StaticResource FlatCardBorderStyle}"
+                        Padding="0" Grid.Column="1"
+                        Margin="10, 10, 20, 20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Tiêu đề bảng -->
+                    <TextBlock Text="Hóa đơn đã hoàn tất"
                                Foreground="{StaticResource TextPrimaryBrush}"
                                FontSize="20"
-                               FontWeight="Bold"></TextBlock>
+                               FontWeight="DemiBold"
+                               Margin="10"
+                               Grid.Column="0"></TextBlock>
+                    <!-- Bảng -->
+                    <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding TopProducts}"
+                              Style="{StaticResource FlatDataGridStyle}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã hóa đơn"
+                                                Binding="{Binding OrderCode}"
+                                                Width="1.2*" />
+                            <DataGridTextColumn Header="Thanh toán"
+                                                Binding="{Binding PaymentBill}"
+                                                Width="1.6*" />
+                            <DataGridTextColumn Header="Số lượng"
+                                                Binding="{Binding ItemsBill}"
+                                                Width="1.2*" />
+                            <DataGridTextColumn Header="Tổng tiền"
+                                                Binding="{Binding TotalBill}"
+                                                Width="1.2*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
-                
-                
             </Border>
-            
+
         </Grid>
-        
+
     </Grid>
 </Window>

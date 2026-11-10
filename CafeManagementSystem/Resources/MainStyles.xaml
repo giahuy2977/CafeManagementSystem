@@ -130,5 +130,69 @@
     <!-- 5. Icon Biểu đồ miền nhỏ cho tổng doanh thu -->
     <StreamGeometry x:Key="IconMiniChart">M2,18L8,12L13,14.5L22,8V18H2Z</StreamGeometry>
     
+    <!-- =========================================================================== -->
+    <!-- STYLE CHUẨN CHO TOÀN BỘ DATAGRID -->
+    <Style x:Key="FlatDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="{StaticResource SurfaceAltBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Padding" Value="8,8" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushDefault}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+    </Style>
 
+    <!-- 2. Style cho Ô dữ liệu DataGrid -->
+    <Style x:Key="FlatDataGridCellStyle" TargetType="DataGridCell">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="8,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource TintBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- 3. Style tổng cho DataGrid (Gộp toàn bộ thuộc tính chung + 2 Style trên) -->
+    <Style x:Key="FlatDataGridStyle" TargetType="DataGrid">
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="CanUserResizeRows" Value="False" />
+        <Setter Property="SelectionMode" Value="Single" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BorderBrushDefault}" />
+        <Setter Property="Background" Value="{StaticResource SurfaceCardBrush}" />
+        <Setter Property="RowBackground" Value="{StaticResource SurfaceCardBrush}" />
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource SurfaceAltBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushDefault}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="RowHeight" Value="44" />
+        <Setter Property="ColumnHeaderHeight" Value="40" />
+        <Setter Property="FontFamily" Value="Be Vietnam Pro, Segoe UI" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+        <!-- Tự động gắn luôn HeaderStyle và CellStyle -->
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource FlatDataGridColumnHeaderStyle}" />
+        <Setter Property="CellStyle" Value="{StaticResource FlatDataGridCellStyle}" />
+    </Style>
+
+    <!-- 4. Style chữ đậm màu Primary cho cột Tiền tệ trong DataGrid -->
+    <Style x:Key="CurrencyColumnTextStyle" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    
 </ResourceDictionary>
