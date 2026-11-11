@@ -190,7 +190,7 @@
 
     <!-- 4. Style chữ đậm màu Primary cho cột Tiền tệ trong DataGrid -->
     <Style x:Key="CurrencyColumnTextStyle" TargetType="TextBlock">
-        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontWeight" Value="DemiBold" />
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
