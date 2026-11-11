@@ -10,7 +10,9 @@
     <!-- StaffWalnut: Nút phụ / Đang chọn -->
     <SolidColorBrush x:Key="AccentBrush" Color="#8B5E3C" />
     <!-- Admin Light Brown: Điểm nhấn -->
-
+    <SolidColorBrush x:Key="SecondaryDarkBackground" Color="#4E342E" />
+    <!-- Dark Brown : Nền tối -->
+    
     <!-- 2. Màu nền & Viền 1px (Flat Design - Không dùng Shadow) -->
     <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F1EAE3" />
     <!-- StaffLinen: Nền tổng thể -->

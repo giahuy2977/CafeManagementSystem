@@ -5,8 +5,114 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CafeManagementSystem.Views.Dialogs"
         mc:Ignorable="d"
-        Title="InvoiceDetailDialog" Height="450" Width="800">
+        Title="InvoiceDetailDialog" Height="460" Width="640"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource SurfaceCardBrush}"
+        FontFamily="Be Vietnam Pro, Segoe UI">
+    <Window.Resources>
+        <!-- Style căn giữa cho cột Số lượng (Qty) -->
+        <Style x:Key="CenterCellTextStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <!-- Style căn phải cho cột Đơn giá & Thành tiền -->
+        <Style x:Key="RightCellTextStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <!-- Style căn phải cho tiêu đề cột Đơn giá & Thành tiền -->
+        <Style x:Key="RightColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource FlatDataGridColumnHeaderStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
+
+        <!-- Style căn giữa cho tiêu đề cột Số lượng -->
+        <Style x:Key="CenterColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource FlatDataGridColumnHeaderStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <!-- Header -->
+            <RowDefinition Height="*"></RowDefinition>
+            <!-- Table danh sách món -->
+            <RowDefinition Height="auto"></RowDefinition>
+            <!-- Cụm thông tin Tổng/GiảmGiá/ThanhToán -->
+            <RowDefinition Height="auto"></RowDefinition>
+            <!-- Nút tắt -->
+        </Grid.RowDefinitions>
+
+        <!-- ============================================================================== -->
+        <!-- ROW 0 : HEADER DIALOG (Tiêu đề , mã hóa đơn, và thông tin thành công) -->
+        <!-- ============================================================================== -->
+
+        <Border Grid.Row="0" Padding="15"
+                Background="{StaticResource SecondaryDarkBackground}">
+            <DockPanel>
+                <!-- Trạng thái hóa đơn -->
+                <Border Grid.Column="1"
+                        CornerRadius="6"
+                        Padding="12,4"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Right">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="{StaticResource StatusOkBrush}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                    <Setter Property="Background" Value="{StaticResource StatusWarnBgBrush}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status}" Value="Cancelled">
+                                    <Setter Property="Background" Value="{StaticResource StatusErrBgBrush}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+
+                    <TextBlock Text="{Binding Status, FallbackValue='THÀNH CÔNG'}"
+                               FontSize="12"
+                               FontWeight="Bold">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{StaticResource TextOnDarkBrush}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                        <Setter Property="Foreground" Value="{StaticResource StatusWarnBrush}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="Cancelled">
+                                        <Setter Property="Foreground" Value="{StaticResource StatusErrBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Border>
+
+                <!-- Tiêu đề hóa đơn và mã hóa đơn -->
+                <TextBlock Text="THÔNG TIN HÓA ĐƠN"
+                           Foreground="{StaticResource TextOnDarkBrush}"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Margin="15, 0, 0, 0"></TextBlock>
+
+                <TextBlock Text=" - #HD0012"
+                           Foreground="{StaticResource TextOnDarkBrush}"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"></TextBlock>
+            </DockPanel>
+        </Border>
+
+        <!-- ============================================================================== -->
+        <!-- ROW 1 : BẢNG DANH SÁCH CÁC SẢN PHẨM CỦA HÓA ĐƠN -->
+        <!-- ============================================================================== -->
         
+        
+
     </Grid>
 </Window>
