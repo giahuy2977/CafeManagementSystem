@@ -21,5 +21,7 @@ namespace CafeManagementSystem.Views
         {
             InitializeComponent();
         }
+
+        
     }
 }
