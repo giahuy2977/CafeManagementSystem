@@ -59,4 +59,13 @@
     <!--6. Màu đặc thù cho bộ icon Revenue-->
     <SolidColorBrush x:Key="IconPrimaryBrush" Color="#33201A" />
     <SolidColorBrush x:Key="IconSecondaryBrush" Color="#FFDAA520" />
+    
+    <!--7. Màu đặc thù cho Badge xử lý phần trạng thái đơn hàng -->
+    <SolidColorBrush x:Key="BgCompleteBrush" Color="#2F5D3A" />
+    <SolidColorBrush x:Key="BgPendingBrush" Color="#FEF3C7" />
+    <SolidColorBrush x:Key="BgCancelledBrush" Color="#FEE2E2" />
+    <SolidColorBrush x:Key="TextCompleteBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="TextPendingBrush" Color="#92400E" />
+    <SolidColorBrush x:Key="TextCancelledBrush" Color="#991B1B" />
+    
 </ResourceDictionary>
