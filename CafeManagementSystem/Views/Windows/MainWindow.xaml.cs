@@ -19,6 +19,7 @@ namespace CafeManagementSystem
         public MainWindow()
         {
             InitializeComponent();
+           
         }
     }
 }
