@@ -1,0 +1,205 @@
+<UserControl x:Class="CafeManagementSystem.Views.UserControls.StaffManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1100"
+             Background="{StaticResource AppBackgroundBrush}"
+             FontFamily="Be Vietnam Pro, Segoe UI">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Tiêu đề -->
+            <RowDefinition Height="*"/>
+            <!-- Layout 2 cột: Danh sách (6.5*) + Inline Form (3.5*) -->
+        </Grid.RowDefinitions>
+
+        <!-- ================================================================ -->
+        <!-- ROW 0: TIÊU ĐỀ MÀN HÌNH                                          -->
+        <!-- ================================================================ -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="Quản Lý Nhân Sự &amp; Hồ Sơ Nhân Viên (Chủ Quán)"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       VerticalAlignment="Center"/>
+        </DockPanel>
+
+        <!-- ================================================================ -->
+        <!-- ROW 1: GRID 2 CỘT                                                -->
+        <!-- ================================================================ -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6.5*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="3.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ============================================================ -->
+            <!-- CỘT TRÁI: BẢNG DANH SÁCH NHÂN SỰ                            -->
+            <!-- ============================================================ -->
+            <Border Grid.Column="0"
+                    Style="{StaticResource FlatCardBorderStyle}"
+                    Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Thanh tìm kiếm & bộ lọc -->
+                        <RowDefinition Height="*"/>
+                        <!-- DataGrid -->
+                    </Grid.RowDefinitions>
+
+                    <!-- Thanh tìm kiếm & bộ lọc -->
+                    <Grid Grid.Row="0" Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Ô tìm kiếm -->
+                        <TextBox x:Name="TxtSearchStaff"
+                                 Grid.Column="0"
+                                 Height="36"
+                                 Style="{StaticResource FlatTextBoxStyle}"
+                                 Margin="0,0,8,0"
+                                 ToolTip="Tìm theo Tên, Email hoặc Số điện thoại..."/>
+
+                        <!-- Lọc trạng thái -->
+                        <ComboBox x:Name="CmbStatusFilter"
+                                  Grid.Column="1"
+                                  Width="130"
+                                  Height="36"
+                                  SelectedIndex="0"
+                                  VerticalContentAlignment="Center"
+                                  Margin="0,0,8,0">
+                            <ComboBoxItem Content="Tất cả trạng thái"/>
+                            <ComboBoxItem Content="Đang hoạt động"/>
+                            <ComboBoxItem Content="Đã khóa tài khoản"/>
+                        </ComboBox>
+
+                        <!-- Nút Tìm kiếm -->
+                        <Button Grid.Column="2"
+                                Content="Tìm kiếm"
+                                Width="90"
+                                Height="36"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Margin="0,0,6,0"/>
+
+                        <!-- Nút Làm mới -->
+                        <Button Grid.Column="3"
+                                Content="Làm mới"
+                                Width="85"
+                                Height="36"
+                                Style="{StaticResource SecondaryButtonStyle}"/>
+                    </Grid>
+
+                    <!-- DataGrid danh sách nhân sự -->
+                    <DataGrid Grid.Row="1"
+                              x:Name="DgStaffList"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              Style="{StaticResource FlatDataGridStyle}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã NV" Binding="{Binding StaffCode}" Width="70"/>
+                            <DataGridTextColumn Header="Họ và Tên" Binding="{Binding DisplayName}" Width="1.8*"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="1.8*"/>
+                            <DataGridTextColumn Header="Số Điện Thoại" Binding="{Binding Phone}" Width="1.2*"/>
+                            <DataGridTextColumn Header="Vai Trò" Binding="{Binding Role}" Width="1*"/>
+                            <DataGridTextColumn Header="Lương/Giờ" Binding="{Binding HourlyRate, StringFormat={}{0:N0}đ/h}" HeaderStyle="{StaticResource RightColumnHeaderStyle}" ElementStyle="{StaticResource RightCellTextStyle}" Width="1.2*"/>
+                            <DataGridTemplateColumn Header="Trạng Thái" Width="1.2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding StatusBgBrush}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding StatusText}" FontSize="11" FontWeight="SemiBold" Foreground="{Binding StatusFgBrush}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+            <!-- ============================================================ -->
+            <!-- CỘT PHẢI: INLINE FORM QUẢN TRỊ HỒ SƠ NHÂN SỰ                 -->
+            <!-- ============================================================ -->
+            <Border Grid.Column="2"
+                    Style="{StaticResource FlatCardBorderStyle}"
+                    Padding="18">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="HỒ SƠ NHÂN VIÊN"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource PrimaryBrush}"
+                                   Margin="0,0,0,12"/>
+
+                        <!-- Mã nhân viên -->
+                        <TextBlock Text="Mã nhân sự" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="FormStaffCode" Height="36" IsReadOnly="True" Background="{StaticResource SurfaceAltBrush}" Style="{StaticResource FlatTextBoxStyle}" Margin="0,0,0,10"/>
+
+                        <!-- Họ và tên -->
+                        <TextBlock Text="Họ và tên (*)" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="FormDisplayName" Height="36" Style="{StaticResource FlatTextBoxStyle}" Margin="0,0,0,10"/>
+
+                        <!-- Email -->
+                        <TextBlock Text="Email đăng nhập (*)" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="FormEmail" Height="36" Style="{StaticResource FlatTextBoxStyle}" Margin="0,0,0,10"/>
+
+                        <!-- Số điện thoại -->
+                        <TextBlock Text="Số điện thoại" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="FormPhone" Height="36" Style="{StaticResource FlatTextBoxStyle}" Margin="0,0,0,10"/>
+
+                        <!-- Mật khẩu khởi tạo -->
+                        <TextBlock Text="Mật khẩu khởi tạo / Đặt lại" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                        <Border Height="36" Background="{StaticResource SurfaceCardBrush}" BorderBrush="{StaticResource BorderBrushDefault}" BorderThickness="1" CornerRadius="8" Margin="0,0,0,10">
+                            <PasswordBox x:Name="FormPassword" FontSize="14" BorderThickness="0" Padding="12,0" VerticalContentAlignment="Center"/>
+                        </Border>
+
+                        <!-- Mức lương giờ -->
+                        <TextBlock Text="Mức lương theo giờ (VNĐ/h) (*)" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                        <TextBox x:Name="FormHourlyRate" Height="36" Text="25000" Style="{StaticResource FlatTextBoxStyle}" Margin="0,0,0,10"/>
+
+                        <!-- Vai trò -->
+                        <TextBlock Text="Vai trò hệ thống" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                        <ComboBox x:Name="FormRoleCmb" Height="36" SelectedIndex="0" VerticalContentAlignment="Center" Margin="0,0,0,10">
+                            <ComboBoxItem Content="Staff (Nhân viên)"/>
+                            <ComboBoxItem Content="Owner (Chủ quán)"/>
+                        </ComboBox>
+
+                        <!-- Trạng thái hoạt động -->
+                        <CheckBox x:Name="FormIsActiveChk" Content="Tài khoản đang hoạt động (Cho phép đăng nhập)" IsChecked="True" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2,0,16"/>
+
+                        <!-- Cụm nút hành động -->
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Content="Thêm mới" Height="38" Style="{StaticResource PrimaryButtonStyle}"/>
+                            <Button Grid.Column="2" Content="Lưu cập nhật" Height="38" Style="{StaticResource SecondaryButtonStyle}"/>
+                        </Grid>
+
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Content="Khóa / Mở" Height="38" Style="{StaticResource DangerButtonStyle}"/>
+                            <Button Grid.Column="2" Content="Làm sạch form" Height="38" Style="{StaticResource SecondaryButtonStyle}"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+        </Grid>
+    </Grid>
+</UserControl>

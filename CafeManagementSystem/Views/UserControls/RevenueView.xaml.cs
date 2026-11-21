@@ -15,7 +15,7 @@ namespace CafeManagementSystem.Views.UserControls
     /// <summary>
     /// Interaction logic for RevenueView.xaml
     /// </summary>
-    public partial class RevenueView : Window
+    public partial class RevenueView : UserControl
     {
         public RevenueView()
         {

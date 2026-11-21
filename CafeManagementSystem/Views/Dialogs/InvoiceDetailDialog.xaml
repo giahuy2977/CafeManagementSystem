@@ -10,29 +10,6 @@
         ResizeMode="NoResize"
         Background="{StaticResource SurfaceCardBrush}"
         FontFamily="Be Vietnam Pro, Segoe UI">
-    <Window.Resources>
-        <!-- Style căn giữa cho cột Số lượng (Qty) -->
-        <Style x:Key="CenterCellTextStyle" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-
-        <!-- Style căn phải cho cột Đơn giá & Thành tiền -->
-        <Style x:Key="RightCellTextStyle" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-
-        <!-- Style căn phải cho tiêu đề cột Đơn giá & Thành tiền -->
-        <Style x:Key="RightColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource FlatDataGridColumnHeaderStyle}">
-            <Setter Property="HorizontalContentAlignment" Value="Right" />
-        </Style>
-
-        <!-- Style căn giữa cho tiêu đề cột Số lượng -->
-        <Style x:Key="CenterColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource FlatDataGridColumnHeaderStyle}">
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-        </Style>
-    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
