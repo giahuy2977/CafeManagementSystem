@@ -20,6 +20,7 @@ namespace CafeManagementSystem.Views
         public LoginWindow()
         {
             InitializeComponent();
+            
         }
     }
 }
