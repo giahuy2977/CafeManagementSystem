@@ -3,138 +3,305 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CafeManagementSystem.Views"
         mc:Ignorable="d"
-        Title="Cafe Login" Height="470" Width="420"
+        Title="Cafe Management System - Đăng nhập" 
+        Height="560" Width="440"
         Background="{StaticResource SurfaceCardBrush}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         FontFamily="Be Vietnam Pro, Segoe UI">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="96"/>
             <!-- Header -->
-            <RowDefinition Height="*"></RowDefinition>
-            <!-- Username & Password -->
+            <RowDefinition Height="*"/>
+            <!-- 3 Khung Nội Tuyến -->
         </Grid.RowDefinitions>
 
         <!-- ============================================= -->
-        <!-- ROW 0 : TIÊU ĐỀ -->
+        <!-- ROW 0: HEADER CHUẨN CAFE POS                  -->
         <!-- ============================================= -->
-
         <Border Grid.Row="0"
                 Background="{StaticResource PrimaryBrush}"
-                CornerRadius="0"
-                BorderThickness="0"
-                Padding="10">
-            <WrapPanel HorizontalAlignment="Center">
-                <TextBlock Text="&#x2615;" 
-                           FontFamily="Segoe UI Symbol" 
-                           FontSize="32" 
-                           Foreground="{StaticResource AccentBrush}"
-                           Margin="0, 0, 10, 10"></TextBlock>
-
-                <TextBlock Text="ĐĂNG NHẬP"
-                           Foreground="{StaticResource TextOnDarkBrush}"
-                           FontSize="22"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"></TextBlock>
-            </WrapPanel>
+                Padding="16, 12">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="&#x2615;" 
+                               FontFamily="Segoe UI Symbol" 
+                               FontSize="28" 
+                               Foreground="{StaticResource AccentBrush}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0"/>
+                    <TextBlock Text="CAFE POS"
+                               Foreground="{StaticResource TextOnDarkBrush}"
+                               FontSize="22"
+                               FontWeight="ExtraBold"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock x:Name="HeaderSubTitle"
+                           Text="HỆ THỐNG QUẢN LÝ QUÁN CÀ PHÊ"
+                           Foreground="{StaticResource TintBrush}"
+                           FontSize="11"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           Margin="0,4,0,0"/>
+            </StackPanel>
         </Border>
 
         <!-- ============================================= -->
-        <!-- ROW 1 : USERNAME, PASSWORD, BUTTON -->
+        <!-- ROW 1: CHỨA 3 KHUNG GIAO DIỆN NỘI TUYẾN       -->
         <!-- ============================================= -->
+        <Grid Grid.Row="1" Margin="32, 16, 32, 20">
 
-        <StackPanel Grid.Row="1" Margin="36,24,36,24">
+            <!-- ======================================================== -->
+            <!-- KHUNG 1: ĐĂNG NHẬP (Mặc định hiển thị)                   -->
+            <!-- ======================================================== -->
+            <StackPanel x:Name="LoginPanel" Visibility="Visible">
+                
+                <!-- Thanh chuyển đổi vai trò (Role Toggle: Nhân viên | Chủ quán) -->
+                <TextBlock Text="Chọn vai trò đăng nhập:"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Margin="0,0,0,6"/>
+                
+                <Border Background="{StaticResource SurfaceAltBrush}"
+                        BorderBrush="{StaticResource BorderBrushDefault}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="3"
+                        Margin="0,0,0,14">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-            <!-- 1. Trường Username -->
-            <TextBlock Text="Username"
-                       FontSize="14"
-                       FontWeight="SemiBold"
-                       Foreground="{StaticResource TextPrimaryBrush}"
-                       Margin="0,0,0,8" />
+                        <RadioButton x:Name="RbStaffRole"
+                                     GroupName="RoleToggle"
+                                     IsChecked="True"
+                                     Content="Nhân viên"
+                                     HorizontalAlignment="Stretch"
+                                     HorizontalContentAlignment="Center"
+                                     Height="34"
+                                     Cursor="Hand">
+                            <RadioButton.Template>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Border x:Name="tabBorder"
+                                            Background="Transparent"
+                                            CornerRadius="6">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="13" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{TemplateBinding Content}" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="tabBorder" Property="Background" Value="{StaticResource PrimaryBrush}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource TextOnDarkBrush}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </RadioButton.Template>
+                        </RadioButton>
 
-            <TextBox x:Name="UsernameTextBox"
-                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                         Style="{StaticResource FlatTextBoxStyle}" 
-                         Margin="0, 0, 0, 16"/>
+                        <RadioButton x:Name="RbOwnerRole"
+                                     Grid.Column="1"
+                                     GroupName="RoleToggle"
+                                     Content="Chủ quán"
+                                     HorizontalAlignment="Stretch"
+                                     HorizontalContentAlignment="Center"
+                                     Height="34"
+                                     Cursor="Hand">
+                            <RadioButton.Template>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Border x:Name="tabBorder"
+                                            Background="Transparent"
+                                            CornerRadius="6">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="13" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{TemplateBinding Content}" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="tabBorder" Property="Background" Value="{StaticResource PrimaryBrush}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource TextOnDarkBrush}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsChecked" Value="False">
+                                            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </RadioButton.Template>
+                        </RadioButton>
+                    </Grid>
+                </Border>
 
-            <!-- 2. Trường Password -->
-            <TextBlock Text="Password"
-                       FontSize="14"
-                       FontWeight="SemiBold"
-                       Foreground="{StaticResource TextPrimaryBrush}"
-                       Margin="0,0,0,8" />
+                <!-- Trường Email / Username -->
+                <TextBlock Text="Email hoặc Tên đăng nhập"
+                           FontSize="13"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           Margin="0,0,0,4"/>
+                <TextBox x:Name="TxtLoginUser"
+                         Height="38"
+                         Text="staff@cafe.com"
+                         Style="{StaticResource FlatTextBoxStyle}"
+                         Margin="0,0,0,10"/>
 
-            <Border Height="40"
-                    Background="{StaticResource SurfaceCardBrush}"
-                    BorderBrush="{StaticResource BorderBrushDefault}"
-                    BorderThickness="1"
-                    CornerRadius="8">
-                <!-- PasswordBox (Hiển thị mặc định ẩn mật khẩu) -->
-                <PasswordBox x:Name="UserPasswordBox"
+                <!-- Trường Password -->
+                <TextBlock Text="Mật khẩu"
+                           FontSize="13"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           Margin="0,0,0,4"/>
+                <Border Height="38"
+                        Background="{StaticResource SurfaceCardBrush}"
+                        BorderBrush="{StaticResource BorderBrushDefault}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Margin="0,0,0,6">
+                    <PasswordBox x:Name="TxtLoginPassword"
                                  FontSize="14"
+                                 Password="123"
                                  Foreground="{StaticResource TextPrimaryBrush}"
                                  Background="Transparent"
                                  BorderThickness="0"
                                  Padding="12,0"
                                  VerticalContentAlignment="Center"/>
-            </Border>
+                </Border>
 
-            <!-- 3. Dòng thông báo lỗi (Invalid username or password...) -->
-            <TextBlock Text="{Binding ErrorMessage, FallbackValue='Tài khoản hoặc mật khẩu chưa đúng. Vui lòng thử lại.'}"
-                       FontSize="12"
-                       Foreground="{StaticResource StatusErrBrush}"
-                       Margin="0,8,0,0">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Visibility" Value="Visible" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ErrorMessage}" Value="">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding ErrorMessage}" Value="{x:Null}">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
+                <!-- Quên mật khẩu link -->
+                <TextBlock HorizontalAlignment="Right" Margin="0,0,0,12">
+                    <Hyperlink Foreground="{StaticResource SecondaryBrush}"
+                               TextDecorations="None">
+                        Quên mật khẩu?
+                    </Hyperlink>
+                </TextBlock>
 
-            <!-- 4. Nút Login (IsDefault="True" giúp nhấn phím Enter là đăng nhập ngay) -->
-            <Button Content="Login"
-                    Command="{Binding LoginCommand}"
-                    IsDefault="True"
-                    Style="{StaticResource LoginActionButtonStyle}"
-                    Margin="0,20,0,16" />
+                <!-- Dòng báo lỗi / trạng thái -->
+                <TextBlock x:Name="TxtLoginError"
+                           Text=""
+                           FontSize="12"
+                           Foreground="{StaticResource StatusErrBrush}"
+                           Visibility="Collapsed"
+                           Margin="0,0,0,8"/>
 
-            <!-- 5. Nút Forgot Password? -->
-            <Button Content="Forgot Password?"
-                    Command="{Binding ForgotPasswordCommand}"
-                    HorizontalAlignment="Center"
-                    Cursor="Hand"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    FontSize="14"
-                    Foreground="{StaticResource SecondaryBrush}">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <TextBlock x:Name="linkText"
-                                   Text="{TemplateBinding Content}"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   FontSize="{TemplateBinding FontSize}" />
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="linkText" Property="TextDecorations" Value="Underline" />
-                                <Setter TargetName="linkText" Property="Foreground" Value="{StaticResource PrimaryBrush}" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                <!-- Nút Đăng nhập -->
+                <Button Content="Đăng nhập"
+                        Height="40"
+                        IsDefault="True"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Margin="0,0,0,12"/>
 
-        </StackPanel>
+                <!-- Link chuyển sang Tạo tài khoản -->
+                <TextBlock HorizontalAlignment="Center" Margin="0,4,0,0">
+                    <Run Text="Chưa có tài khoản?" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <Hyperlink Foreground="{StaticResource PrimaryBrush}"
+                               FontWeight="Bold"
+                               TextDecorations="None">
+                        Đăng ký ngay
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
 
+            <!-- ======================================================== -->
+            <!-- KHUNG 2: TẠO TÀI KHOẢN (ĐĂNG KÝ)                         -->
+            <!-- ======================================================== -->
+            <StackPanel x:Name="RegisterPanel" Visibility="Collapsed">
+                <TextBlock Text="TẠO TÀI KHOẢN MỚI"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource PrimaryBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,10"/>
+
+                <!-- Role chọn khi đăng ký -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,12">
+                    <RadioButton x:Name="RbRegStaff" Content="Nhân viên" IsChecked="True" GroupName="RegRole" Margin="0,0,20,0" FontWeight="SemiBold"/>
+                    <RadioButton x:Name="RbRegOwner" Content="Chủ quán" GroupName="RegRole" FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <!-- Họ và tên -->
+                <TextBlock Text="Họ và tên" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                <TextBox x:Name="TxtRegFullName" Height="36" Style="{StaticResource FlatTextBoxStyle}" Margin="0,0,0,8"/>
+
+                <!-- Email -->
+                <TextBlock Text="Email" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                <TextBox x:Name="TxtRegEmail" Height="36" Style="{StaticResource FlatTextBoxStyle}" Margin="0,0,0,8"/>
+
+                <!-- Mật khẩu -->
+                <TextBlock Text="Mật khẩu" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                <Border Height="36" Background="{StaticResource SurfaceCardBrush}" BorderBrush="{StaticResource BorderBrushDefault}" BorderThickness="1" CornerRadius="8" Margin="0,0,0,14">
+                    <PasswordBox x:Name="TxtRegPassword" FontSize="14" BorderThickness="0" Padding="12,0" VerticalContentAlignment="Center"/>
+                </Border>
+
+                <!-- Nút Đăng ký -->
+                <Button Content="Tạo tài khoản"
+                        Height="40"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Margin="0,0,0,10"/>
+
+                <!-- Quay lại đăng nhập -->
+                <TextBlock HorizontalAlignment="Center">
+                    <Run Text="Đã có tài khoản?" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <Hyperlink Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" TextDecorations="None">
+                        Quay lại Đăng nhập
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+            <!-- ======================================================== -->
+            <!-- KHUNG 3: QUÊN MẬT KHẨU                                   -->
+            <!-- ======================================================== -->
+            <StackPanel x:Name="ForgotPanel" Visibility="Collapsed">
+                <TextBlock Text="KHÔI PHỤC MẬT KHẨU"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource PrimaryBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,6"/>
+                <TextBlock Text="Nhập Email để thiết lập mật khẩu mới"
+                           FontSize="12"
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,12"/>
+
+                <!-- Email -->
+                <TextBlock Text="Email đã đăng ký" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                <TextBox x:Name="TxtForgotEmail" Height="36" Style="{StaticResource FlatTextBoxStyle}" Margin="0,0,0,8"/>
+
+                <!-- Mật khẩu mới -->
+                <TextBlock Text="Mật khẩu mới" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                <Border Height="36" Background="{StaticResource SurfaceCardBrush}" BorderBrush="{StaticResource BorderBrushDefault}" BorderThickness="1" CornerRadius="8" Margin="0,0,0,8">
+                    <PasswordBox x:Name="TxtForgotNewPassword" FontSize="14" BorderThickness="0" Padding="12,0" VerticalContentAlignment="Center"/>
+                </Border>
+
+                <!-- Xác nhận mật khẩu mới -->
+                <TextBlock Text="Xác nhận mật khẩu mới" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                <Border Height="36" Background="{StaticResource SurfaceCardBrush}" BorderBrush="{StaticResource BorderBrushDefault}" BorderThickness="1" CornerRadius="8" Margin="0,0,0,14">
+                    <PasswordBox x:Name="TxtForgotConfirmPassword" FontSize="14" BorderThickness="0" Padding="12,0" VerticalContentAlignment="Center"/>
+                </Border>
+
+                <!-- Nút Đặt lại mật khẩu -->
+                <Button Content="Đặt lại mật khẩu"
+                        Height="40"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Margin="0,0,0,10"/>
+
+                <!-- Quay lại đăng nhập -->
+                <TextBlock HorizontalAlignment="Center">
+                    <Hyperlink Foreground="{StaticResource PrimaryBrush}" FontWeight="Bold" TextDecorations="None">
+                        Quay lại Đăng nhập
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>

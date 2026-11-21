@@ -1,0 +1,147 @@
+<Window x:Class="CafeManagementSystem.Views.StaffMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Cafe Management System - Phân Hệ Bán Hàng &amp; Chấm Công (Staff)" 
+        Height="760" Width="1280"
+        MinHeight="640" MinWidth="1024"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource AppBackgroundBrush}"
+        FontFamily="Be Vietnam Pro, Segoe UI">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ================================================ -->
+        <!-- CỘT 0: SIDEBAR DÀNH CHO NHÂN VIÊN                 -->
+        <!-- ================================================ -->
+        <Border Grid.Column="0"
+                Background="{StaticResource PrimaryBrush}"
+                Padding="0" Margin="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Tiêu đề logo Sidebar -->
+                <StackPanel Grid.Row="0" Margin="0, 24, 0, 32" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="&#x2615;" 
+                                   FontFamily="Segoe UI Symbol" 
+                                   FontSize="24" 
+                                   Foreground="{StaticResource AccentBrush}"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,8,0"/>
+                        <TextBlock Text="CAFE POS"
+                                   Foreground="{StaticResource TextOnDarkBrush}"
+                                   FontSize="22"
+                                   FontWeight="ExtraBold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Text="PHÂN HỆ NHÂN VIÊN"
+                               Foreground="{StaticResource TintBrush}"
+                               FontSize="11"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <!-- Bộ 4 nút Sidebar phía trên (Tuyệt đối KHÔNG có Thống kê) -->
+                <StackPanel Grid.Row="1">
+                    <!-- Nút 1: Bán hàng (Sales) -->
+                    <RadioButton x:Name="NavSalesBtn"
+                                 GroupName="StaffNavigation"
+                                 IsChecked="True"
+                                 Click="OnNavigateClick"
+                                 Tag="Sales"
+                                 Style="{StaticResource SidebarNavButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE80A;" FontFamily="Segoe MDL2 Assets" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Bán hàng (Sales)" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Nút 2: Thực đơn (Menu - Chỉ đọc) -->
+                    <RadioButton x:Name="NavMenuBtn"
+                                 GroupName="StaffNavigation"
+                                 Click="OnNavigateClick"
+                                 Tag="Menu"
+                                 Style="{StaticResource SidebarNavButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xEC32;" FontFamily="Segoe MDL2 Assets" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Thực đơn" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Nút 3: Hóa đơn (Invoices) -->
+                    <RadioButton x:Name="NavInvoicesBtn"
+                                 GroupName="StaffNavigation"
+                                 Click="OnNavigateClick"
+                                 Tag="Invoices"
+                                 Style="{StaticResource SidebarNavButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE8A1;" FontFamily="Segoe MDL2 Assets" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Hóa đơn" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Nút 4: Chấm công (Attendance) -->
+                    <RadioButton x:Name="NavAttendanceBtn"
+                                 GroupName="StaffNavigation"
+                                 Click="OnNavigateClick"
+                                 Tag="Attendance"
+                                 Style="{StaticResource SidebarNavButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE8F7;" FontFamily="Segoe MDL2 Assets" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Chấm công (Ca làm)" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+
+                <!-- Cụm dưới đáy: Cài đặt và Tên nhân viên -->
+                <StackPanel Grid.Row="2" Margin="0,0,0,16">
+                    <RadioButton x:Name="NavSettingsBtn"
+                                 GroupName="StaffNavigation"
+                                 Click="OnNavigateClick"
+                                 Tag="Settings"
+                                 Style="{StaticResource SidebarNavButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="16" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Cài đặt" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Đường kẻ viền mờ -->
+                    <Border Height="1" Background="{StaticResource SecondaryBrush}" Opacity="0.5" Margin="16,8,16,12"/>
+
+                    <!-- Tên nhân viên & Nút Đăng xuất nhanh -->
+                    <Grid Margin="16,0,16,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource TextOnDarkBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="StaffNameDisplay" Text="Nguyễn Thu Ngân" FontSize="13" Foreground="{StaticResource TextOnDarkBrush}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                        </StackPanel>
+                        <Button Grid.Column="1" Click="OnLogoutClick" ToolTip="Đăng xuất" Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="4">
+                            <TextBlock Text="&#xF3B1;" FontFamily="Segoe MDL2 Assets" FontSize="15" Foreground="{StaticResource StatusErrBgBrush}"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ================================================ -->
+        <!-- CỘT 1: VÙNG NỘI DUNG HIỂN THỊ CÁC MÀN HÌNH CON   -->
+        <!-- ================================================ -->
+        <ContentControl x:Name="StaffContentArea" Grid.Column="1" Margin="0"/>
+    </Grid>
+</Window>
