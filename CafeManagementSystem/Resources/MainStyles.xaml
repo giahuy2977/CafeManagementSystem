@@ -130,7 +130,7 @@
     <!-- 5. Icon Biểu đồ miền nhỏ cho tổng doanh thu -->
     <StreamGeometry x:Key="IconMiniChart">M2,18L8,12L13,14.5L22,8V18H2Z</StreamGeometry>
     
-    <!-- =========================================================================== -->
+    <!-- ================================ -->
     <!-- STYLE CHUẨN CHO TOÀN BỘ DATAGRID -->
     <Style x:Key="FlatDataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="{StaticResource SurfaceAltBrush}" />
@@ -194,5 +194,112 @@
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+
+    <!-- ======================================================================= -->
+    <!-- STYLE chung cho trạng thái hóa đơn (Dùng chung cho Invoice, Revenue...) -->
+
+    <!-- 1. Viền & Nền của Badge (Bo góc 6px theo chuẩn DESIGN.md) -->
+    <Style x:Key="OrderStatusBadgeBorderStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Padding" Value="10,4" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <!-- Mặc định: Completed (Nền xanh nhạt #DDEBDD) -->
+        <Setter Property="Background" Value="{StaticResource BgCompleteBrush}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Status}" Value="Pending">
+                <Setter Property="Background" Value="{StaticResource BgPendingBrush}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Status}" Value="Cancelled">
+                <Setter Property="Background" Value="{StaticResource BgCancelledBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- 2. Chữ bên trong Badge (Tự động đổi màu & in hoa chữ hiển thị) -->
+    <Style x:Key="OrderStatusBadgeTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Be Vietnam Pro, Segoe UI" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <!-- Mặc định: COMPLETED (Chữ xanh đậm #2F5D3A) -->
+        <Setter Property="Foreground" Value="{StaticResource TextCompleteBrush}" />
+        <Setter Property="Text" Value="THÀNH CÔNG" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Status}" Value="Completed">
+                <Setter Property="Foreground" Value="{StaticResource TextCompleteBrush}" />
+                <Setter Property="Text" Value="THÀNH CÔNG" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Status}" Value="Pending">
+                <Setter Property="Foreground" Value="{StaticResource TextPendingBrush}" />
+                <Setter Property="Text" Value="ĐANG XỬ LÝ" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Status}" Value="Cancelled">
+                <Setter Property="Foreground" Value="{StaticResource TextCancelledBrush}" />
+                <Setter Property="Text" Value="ĐÃ HỦY" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ================================================================= -->
+    <!-- STYLE Ô NHẬP LIỆU TEXTBOX trong LoginWindow -->
     
+    <Style x:Key="FlatTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="FontFamily" Value="Be Vietnam Pro, Segoe UI" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+        <Setter Property="Background" Value="{StaticResource SurfaceCardBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrushDefault}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Style nút cho LoginWindow và PaymentDialog-->
+    <Style x:Key="LoginActionButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
+        <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource SecondaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

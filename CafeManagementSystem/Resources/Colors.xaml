@@ -10,7 +10,9 @@
     <!-- StaffWalnut: Nút phụ / Đang chọn -->
     <SolidColorBrush x:Key="AccentBrush" Color="#8B5E3C" />
     <!-- Admin Light Brown: Điểm nhấn -->
-
+    <SolidColorBrush x:Key="SecondaryDarkBackground" Color="#4E342E" />
+    <!-- Dark Brown : Nền tối -->
+    
     <!-- 2. Màu nền & Viền 1px (Flat Design - Không dùng Shadow) -->
     <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F1EAE3" />
     <!-- StaffLinen: Nền tổng thể -->
@@ -57,4 +59,13 @@
     <!--6. Màu đặc thù cho bộ icon Revenue-->
     <SolidColorBrush x:Key="IconPrimaryBrush" Color="#33201A" />
     <SolidColorBrush x:Key="IconSecondaryBrush" Color="#FFDAA520" />
+    
+    <!--7. Màu đặc thù cho Badge xử lý phần trạng thái đơn hàng -->
+    <SolidColorBrush x:Key="BgCompleteBrush" Color="#2F5D3A" />
+    <SolidColorBrush x:Key="BgPendingBrush" Color="#FEF3C7" />
+    <SolidColorBrush x:Key="BgCancelledBrush" Color="#FEE2E2" />
+    <SolidColorBrush x:Key="TextCompleteBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="TextPendingBrush" Color="#92400E" />
+    <SolidColorBrush x:Key="TextCancelledBrush" Color="#991B1B" />
+    
 </ResourceDictionary>
