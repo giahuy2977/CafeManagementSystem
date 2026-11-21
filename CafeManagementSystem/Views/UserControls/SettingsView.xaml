@@ -1,14 +1,426 @@
-﻿<UserControl x:Class="CafeManagementSystem.Views.UserControls.SettingsView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1040"
-             Background="{StaticResource AppBackgroundBrush}"
-             FontFamily="Be Vietnam Pro, Segoe UI">
+﻿<Window x:Class="CafeManagementSystem.Views.UserControls.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Settings"
+        Width="1440"
+        Height="900"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Be Vietnam Pro, Segoe UI">
 
-    <Grid>
-       
+    <Window.Resources>
+
+        <!-- Style tiêu đề Card -->
+        <Style x:Key="SettingsCardTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+
+        <!-- Style nhãn mật khẩu -->
+        <Style x:Key="PasswordLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+
+        <!-- Style ô nhập mật khẩu -->
+        <Style x:Key="PasswordInputStyle" TargetType="PasswordBox">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="{StaticResource SurfaceCardBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushDefault}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+    </Window.Resources>
+
+    <!-- Nền tổng thể -->
+    <Grid Background="{StaticResource AppBackgroundBrush}">
+
+        <!-- Lề ngoài -->
+        <Grid Margin="16">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ================= CỘT TRÁI ================= -->
+
+            <Grid Grid.Column="0" Margin="0,0,16,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="220"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- ACCOUNT CARD -->
+                <Border Grid.Row="0"
+                        Style="{StaticResource FlatCardBorderStyle}">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Text="Current Account &amp; Session"
+                                   Style="{StaticResource SettingsCardTitleStyle}"/>
+
+                        <Grid Grid.Row="1">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Avatar -->
+                            <Grid Grid.Column="0"
+                                  Width="88"
+                                  Height="88"
+                                  VerticalAlignment="Top"
+                                  Margin="0,0,16,0">
+
+                                <Border Background="{StaticResource TintBrush}"
+                                        CornerRadius="44">
+
+                                    <TextBlock Text="{Binding UserInitials, FallbackValue=NA}"
+                                               FontSize="28"
+                                               Foreground="{StaticResource TextPrimaryBrush}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                                <!-- Icon tài khoản -->
+                                <Border Width="28"
+                                        Height="28"
+                                        CornerRadius="14"
+                                        Background="{StaticResource PrimaryBrush}"
+                                        BorderBrush="{StaticResource SurfaceCardBrush}"
+                                        BorderThickness="2"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom">
+
+                                    <TextBlock Text="&#xE77B;"
+                                               FontFamily="Segoe MDL2 Assets"
+                                               FontSize="14"
+                                               Foreground="{StaticResource TextOnDarkBrush}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                            </Grid>
+
+                            <!-- Tên và quyền -->
+                            <StackPanel Grid.Column="1"
+                                        VerticalAlignment="Top">
+
+                                <TextBlock Text="{Binding CurrentUserName, FallbackValue=Nguyen Van A}"
+                                           FontSize="22"
+                                           FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           TextWrapping="Wrap"/>
+
+                                <Border Background="{StaticResource TintBrush}"
+                                        CornerRadius="16"
+                                        Padding="12,4"
+                                        HorizontalAlignment="Left"
+                                        Margin="0,8,0,0">
+
+                                    <TextBlock Text="{Binding CurrentUserRole, FallbackValue=Manager}"
+                                               FontSize="13"
+                                               Foreground="{StaticResource TextPrimaryBrush}"/>
+
+                                </Border>
+
+                            </StackPanel>
+
+                            <!-- Logout -->
+                            <Button Grid.Column="1"
+                                    Content="&#xF3B1;  Logout"
+                                    FontFamily="Be Vietnam Pro, Segoe UI"
+                                    FontSize="14"
+                                    Width="120"
+                                    Height="40"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Style="{StaticResource DangerButtonStyle}"
+                                    Command="{Binding LogoutCommand}"/>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Border>
+
+                <!-- APPEARANCE CARD -->
+                <Border Grid.Row="1"
+                        Margin="0,16,0,0"
+                        Style="{StaticResource FlatCardBorderStyle}">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Text="Appearance &amp; Display Settings"
+                                   Style="{StaticResource SettingsCardTitleStyle}"/>
+
+                        <!-- Theme -->
+                        <StackPanel Grid.Row="1"
+                                    Margin="0,0,0,20">
+
+                            <TextBlock Text="Theme"
+                                       FontSize="14"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       Margin="0,0,0,8"/>
+
+                            <Border Background="{StaticResource SurfaceAltBrush}"
+                                    BorderBrush="{StaticResource BorderBrushDefault}"
+                                    BorderThickness="1"
+                                    CornerRadius="22"
+                                    Padding="4"
+                                    HorizontalAlignment="Left">
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <RadioButton Content="Light"
+                                                 GroupName="ThemeGroup"
+                                                 IsChecked="{Binding IsLightTheme}"
+                                                 Padding="16,6"
+                                                 FontSize="14"
+                                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                                 Cursor="Hand"/>
+
+                                    <RadioButton Content="Dark"
+                                                 GroupName="ThemeGroup"
+                                                 IsChecked="{Binding IsDarkTheme}"
+                                                 Padding="16,6"
+                                                 FontSize="14"
+                                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                                 Cursor="Hand"/>
+
+                                </StackPanel>
+
+                            </Border>
+
+                        </StackPanel>
+
+                        <!-- Accent Color -->
+                        <StackPanel Grid.Row="2"
+                                    Margin="0,0,0,20">
+
+                            <TextBlock Text="Accent Color"
+                                       FontSize="14"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       Margin="0,0,0,10"/>
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <RadioButton GroupName="AccentGroup"
+                                             IsChecked="{Binding IsEspressoAccent}"
+                                             VerticalContentAlignment="Center"
+                                             Margin="0,0,20,0"
+                                             Cursor="Hand">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="28"
+                                                 Height="28"
+                                                 Fill="{StaticResource PrimaryBrush}"
+                                                 Margin="0,0,8,0"/>
+
+                                        <TextBlock Text="Espresso"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{StaticResource TextPrimaryBrush}"/>
+                                    </StackPanel>
+
+                                </RadioButton>
+
+                                <RadioButton GroupName="AccentGroup"
+                                             IsChecked="{Binding IsWalnutAccent}"
+                                             VerticalContentAlignment="Center"
+                                             Margin="0,0,20,0"
+                                             Cursor="Hand">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="28"
+                                                 Height="28"
+                                                 Fill="{StaticResource SecondaryBrush}"
+                                                 Margin="0,0,8,0"/>
+
+                                        <TextBlock Text="Walnut"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{StaticResource TextPrimaryBrush}"/>
+                                    </StackPanel>
+
+                                </RadioButton>
+
+                                <RadioButton GroupName="AccentGroup"
+                                             IsChecked="{Binding IsLightBrownAccent}"
+                                             VerticalContentAlignment="Center"
+                                             Cursor="Hand">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="28"
+                                                 Height="28"
+                                                 Fill="{StaticResource AccentBrush}"
+                                                 Margin="0,0,8,0"/>
+
+                                        <TextBlock Text="Light Brown"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{StaticResource TextPrimaryBrush}"/>
+                                    </StackPanel>
+
+                                </RadioButton>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <!-- Font Size -->
+                        <StackPanel Grid.Row="3">
+
+                            <TextBlock Text="Font Size"
+                                       FontSize="14"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       Margin="0,0,0,10"/>
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <RadioButton Content="Small"
+                                             GroupName="FontSizeGroup"
+                                             IsChecked="{Binding IsSmallFont}"
+                                             FontSize="14"
+                                             Foreground="{StaticResource TextPrimaryBrush}"
+                                             Margin="0,0,20,0"
+                                             Cursor="Hand"/>
+
+                                <RadioButton Content="Default (14pt)"
+                                             GroupName="FontSizeGroup"
+                                             IsChecked="{Binding IsDefaultFont}"
+                                             FontSize="14"
+                                             Foreground="{StaticResource TextPrimaryBrush}"
+                                             Margin="0,0,20,0"
+                                             Cursor="Hand"/>
+
+                                <RadioButton Content="Large"
+                                             GroupName="FontSizeGroup"
+                                             IsChecked="{Binding IsLargeFont}"
+                                             FontSize="14"
+                                             Foreground="{StaticResource TextPrimaryBrush}"
+                                             Cursor="Hand"/>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <!-- Apply Settings -->
+                        <Button Grid.Row="4"
+                                Content="Apply Settings"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Width="150"
+                                Height="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Margin="0,20,0,0"
+                                Command="{Binding ApplySettingsCommand}"/>
+
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
+            <!-- ================= CỘT PHẢI ================= -->
+
+            <Border Grid.Column="1"
+                    Style="{StaticResource FlatCardBorderStyle}"
+                    VerticalAlignment="Top">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Change Password"
+                               Style="{StaticResource SettingsCardTitleStyle}"/>
+
+                    <!-- Current Password -->
+                    <StackPanel Grid.Row="1"
+                                Margin="0,0,0,20">
+
+                        <TextBlock Text="Current Password"
+                                   Style="{StaticResource PasswordLabelStyle}"/>
+
+                        <PasswordBox x:Name="CurrentPasswordInputBox"
+                                     Style="{StaticResource PasswordInputStyle}"/>
+
+                    </StackPanel>
+
+                    <!-- New Password -->
+                    <StackPanel Grid.Row="2"
+                                Margin="0,0,0,20">
+
+                        <TextBlock Text="New Password"
+                                   Style="{StaticResource PasswordLabelStyle}"/>
+
+                        <PasswordBox x:Name="NewPasswordInputBox"
+                                     Style="{StaticResource PasswordInputStyle}"/>
+
+                    </StackPanel>
+
+                    <!-- Confirm Password -->
+                    <StackPanel Grid.Row="3"
+                                Margin="0,0,0,28">
+
+                        <TextBlock Text="Confirm New Password"
+                                   Style="{StaticResource PasswordLabelStyle}"/>
+
+                        <PasswordBox x:Name="ConfirmPasswordInputBox"
+                                     Style="{StaticResource PasswordInputStyle}"/>
+
+                    </StackPanel>
+
+                    <!-- Save Password -->
+                    <Button Grid.Row="4"
+                            Content="Save New Password"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Height="44"
+                            HorizontalAlignment="Stretch"
+                            Command="{Binding ChangePasswordCommand}"/>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
     </Grid>
-</UserControl>
+
+</Window>
