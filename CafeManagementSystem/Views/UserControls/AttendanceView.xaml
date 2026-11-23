@@ -1,0 +1,223 @@
+<UserControl x:Class="CafeManagementSystem.Views.UserControls.AttendanceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1040"
+             Background="{StaticResource AppBackgroundBrush}"
+             FontFamily="Be Vietnam Pro, Segoe UI">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Tiêu đề -->
+            <RowDefinition Height="Auto"/>
+            <!-- Card Check-in / Check-out -->
+            <RowDefinition Height="*"/>
+            <!-- Card Lịch sử chấm công -->
+        </Grid.RowDefinitions>
+
+        <!-- ================================================================ -->
+        <!-- ROW 0: HEADER VIEW                                               -->
+        <!-- ================================================================ -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="Chấm Công &amp; Ca Làm Việc (Nhân Viên)"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       VerticalAlignment="Center"/>
+        </DockPanel>
+
+        <!-- ================================================================ -->
+        <!-- ROW 1: CARD CHECK-IN / CHECK-OUT TRẠNG THÁI CA HÔM NAY           -->
+        <!-- ================================================================ -->
+        <Border Grid.Row="1"
+                Style="{StaticResource FlatCardBorderStyle}"
+                Margin="0,0,0,16"
+                Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Dòng thông tin ngày giờ và nhân viên -->
+                <Grid Grid.Row="0" Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="18" Foreground="{StaticResource PrimaryBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TxtCurrentDateTime" Text="Hôm nay: Thứ Sáu, 20/11/2026" FontSize="15" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                        <Border Background="{StaticResource TintBrush}" CornerRadius="6" Padding="8,3" Margin="16,0,0,0">
+                            <TextBlock Text="Ca hôm nay: Ca Sáng (07:00 - 15:00)" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Badge trạng thái hiện tại -->
+                    <Border Grid.Column="1" 
+                            x:Name="BadgeShiftStatus"
+                            Background="{StaticResource StatusOkBgBrush}" 
+                            CornerRadius="6" 
+                            Padding="12,6">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE73E;" FontFamily="Segoe MDL2 Assets" FontSize="13" Foreground="{StaticResource StatusOkBrush}" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtShiftStatus" Text="Đang trong ca làm (Vào ca lúc 07:05)" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource StatusOkBrush}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Cụm 2 nút Check-in / Check-out lớn -->
+                <Grid Grid.Row="1" Margin="0,8,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Nút Check-in Vào ca -->
+                    <Button Grid.Column="0"
+                            Height="52"
+                            Cursor="Hand"
+                            Background="{StaticResource StatusOkBrush}"
+                            Foreground="{StaticResource TextOnDarkBrush}"
+                            BorderThickness="0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="btnBorder" Background="{TemplateBinding Background}" CornerRadius="8">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xEB9D;" FontFamily="Segoe MDL2 Assets" FontSize="20" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="CHECK-IN VÀO CA" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="btnBorder" Property="Opacity" Value="0.9"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Nút Check-out Tan ca -->
+                    <Button Grid.Column="2"
+                            Height="52"
+                            Cursor="Hand"
+                            Background="{StaticResource PrimaryBrush}"
+                            Foreground="{StaticResource TextOnDarkBrush}"
+                            BorderThickness="0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="btnBorder" Background="{TemplateBinding Background}" CornerRadius="8">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xF3B1;" FontFamily="Segoe MDL2 Assets" FontSize="18" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="CHECK-OUT TAN CA" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="btnBorder" Property="Background" Value="{StaticResource PrimaryDarkBrush}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+                <TextBlock Grid.Row="2"
+                           Text="* Lưu ý: Nhân viên bấm Check-in khi bắt đầu vào quầy thu ngân và Check-out khi hết ca để hệ thống tự động ghi nhận giờ công."
+                           FontSize="12"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+            </Grid>
+        </Border>
+
+        <!-- ================================================================ -->
+        <!-- ROW 2: BẢNG LỊCH SỬ CHẤM CÔNG CÁ NHÂN                            -->
+        <!-- ================================================================ -->
+        <Border Grid.Row="2"
+                Style="{StaticResource FlatCardBorderStyle}"
+                Padding="16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Thanh tiêu đề & bộ lọc tháng -->
+                <DockPanel Grid.Row="0" Margin="0,0,0,12">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                        <TextBlock Text="Tháng:" FontSize="13" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <ComboBox Width="140" Height="34" SelectedIndex="0" VerticalContentAlignment="Center">
+                            <ComboBoxItem Content="Tháng 11/2026"/>
+                            <ComboBoxItem Content="Tháng 10/2026"/>
+                            <ComboBoxItem Content="Tháng 09/2026"/>
+                        </ComboBox>
+                        <Button Content="Làm mới" Width="90" Height="34" Style="{StaticResource SecondaryButtonStyle}" Margin="8,0,0,0"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Lịch Sử Chấm Công Cá Nhân"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <!-- Bảng DataGrid hiển thị dữ liệu chấm công -->
+                <DataGrid Grid.Row="1"
+                          x:Name="DgAttendanceHistory"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          IsReadOnly="True"
+                          Style="{StaticResource FlatDataGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ngày" Binding="{Binding Date}" Width="1.2*"/>
+                        <DataGridTextColumn Header="Ca Phân Công" Binding="{Binding ShiftName}" Width="1.5*"/>
+                        <DataGridTextColumn Header="Giờ Vào (Check-in)" Binding="{Binding CheckInTime}" Width="1.4*"/>
+                        <DataGridTextColumn Header="Giờ Ra (Check-out)" Binding="{Binding CheckOutTime}" Width="1.4*"/>
+                        <DataGridTextColumn Header="Số Giờ Làm" Binding="{Binding WorkHours}" HeaderStyle="{StaticResource CenterColumnHeaderStyle}" ElementStyle="{StaticResource CenterCellTextStyle}" Width="1*"/>
+                        <DataGridTemplateColumn Header="Trạng Thái" Width="1.2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource StatusOkBgBrush}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Status}" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource StatusOkBrush}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Ghi Chú" Binding="{Binding Note}" Width="2*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!-- Footer tóm tắt tổng giờ công -->
+                <Border Grid.Row="2"
+                        Background="{StaticResource SurfaceAltBrush}"
+                        BorderBrush="{StaticResource BorderBrushDefault}"
+                        BorderThickness="0,1,0,0"
+                        Margin="-16,12,-16,-16"
+                        Padding="16,10">
+                    <DockPanel>
+                        <TextBlock Text="Lương tạm tính (25.000đ/h): 4.400.000đ"
+                                   DockPanel.Dock="Right"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource PrimaryBrush}"
+                                   VerticalAlignment="Center"/>
+
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="Tổng số ca đã làm: " FontSize="13" Foreground="{StaticResource TextSecondaryBrush}"/>
+                            <TextBlock Text="22 ca" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,16,0"/>
+                            <TextBlock Text="Tổng số giờ công: " FontSize="13" Foreground="{StaticResource TextSecondaryBrush}"/>
+                            <TextBlock Text="176.0 giờ" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

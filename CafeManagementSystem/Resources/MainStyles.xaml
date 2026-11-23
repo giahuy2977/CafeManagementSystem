@@ -302,4 +302,85 @@
         </Setter>
     </Style>
 
+    <!-- ======================================== -->
+    <!-- Style chung cho bảng danh sách sản phẩm cho Dialog -->
+    <!-- Style căn giữa cho cột Số lượng (Qty) -->
+    <Style x:Key="CenterCellTextStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- Style căn phải cho cột Đơn giá & Thành tiền -->
+    <Style x:Key="RightCellTextStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- Style căn phải cho tiêu đề cột Đơn giá & Thành tiền -->
+    <Style x:Key="RightColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource FlatDataGridColumnHeaderStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+    </Style>
+
+    <!-- Style căn giữa cho tiêu đề cột Số lượng -->
+    <Style x:Key="CenterColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource FlatDataGridColumnHeaderStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <!-- Style nút điều hướng Sidebar cho cả StaffMainWindow và OwnerMainWindow -->
+    <Style x:Key="SidebarNavButtonStyle" TargetType="RadioButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource TintBrush}" />
+        <Setter Property="FontFamily" Value="Be Vietnam Pro, Segoe UI" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Height" Value="44" />
+        <Setter Property="Margin" Value="12,4" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="RootBorder"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="8"
+                        Padding="12,0">
+                        <Grid>
+                            <!-- Thanh nhấn dọc bên trái (chỉ hiện khi đang chọn tab này) -->
+                            <Border x:Name="ActiveIndicator"
+                                Width="4"
+                                Height="20"
+                                CornerRadius="2"
+                                Background="{StaticResource TintBrush}"
+                                HorizontalAlignment="Left"
+                                Margin="-12,0,0,0"
+                                Visibility="Collapsed" />
+
+                            <!-- Nội dung Icon + Chữ từ StackPanel bên trong RadioButton -->
+                            <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"
+                                          Margin="4,0,0,0" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <!-- Hiệu ứng khi di chuột vào (Hover) -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="RootBorder" Property="Background" Value="{StaticResource PrimaryDarkBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource TextOnDarkBrush}" />
+                        </Trigger>
+
+                        <!-- Hiệu ứng khi đang chọn mục này (Active / IsChecked) -->
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="RootBorder" Property="Background" Value="{StaticResource SecondaryBrush}" />
+                            <Setter TargetName="ActiveIndicator" Property="Visibility" Value="Visible" />
+                            <Setter Property="Foreground" Value="{StaticResource TextOnDarkBrush}" />
+                            <Setter Property="FontWeight" Value="SemiBold" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

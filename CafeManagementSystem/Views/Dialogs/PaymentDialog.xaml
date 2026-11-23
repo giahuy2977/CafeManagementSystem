@@ -5,8 +5,159 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CafeManagementSystem.Views"
         mc:Ignorable="d"
-        Title="PaymentDialog" Height="450" Width="800">
+        Title="PaymentDialog" Height="520" Width="480"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource SurfaceCardBrush}"
+        FontFamily="Be Vietnam Pro, Segoe UI">
     <Grid>
+        <Grid.RowDefinitions>
+            <!-- Chia bố cục tương tự InvoiceDetailDialog-->
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- ============================================ -->
+        <!-- ROW 0 : HEADER gồm Tiêu đề và mã hóa đơn -->
+        <!-- ============================================ -->
+        <StackPanel>
+            <!-- Tiêu đề-->
+            <TextBlock Text="Xác nhận thanh toán"
+                   Grid.Row="0"
+                   Foreground="{StaticResource TextPrimaryBrush}"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Margin="20, 20, 20, 12"></TextBlock>
+            
+            <!-- Mã hóa đơn -->
+            <TextBlock Text="{Binding OrderCode, StringFormat='Mã hóa đơn: #{0}', FallbackValue='Mã hóa đơn: #2026-1106-01'}"
+                           FontSize="16"
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Margin="20, 0, 20, 10"></TextBlock>
+        </StackPanel>
+        
+        <!-- =============================================== -->
+        <!-- ROW 1 : BẢNG DANH SÁCH CÁC SẢN PHẨM -->
+        <!-- =============================================== -->
+        <Border Grid.Row="1"
+        Background="{StaticResource SurfaceCardBrush}"
+        BorderBrush="{StaticResource BorderBrushDefault}"
+        BorderThickness="1"
+        CornerRadius="8"
+        Margin="20,20,20,16"
+        ClipToBounds="True">
+
+            <DataGrid ItemsSource="{Binding OrderDetails}"
+                  Style="{StaticResource FlatDataGridStyle}">
+                <DataGrid.Columns>
+                    <!-- Cột 1: Tên món -->
+                    <DataGridTextColumn Header="Sản phẩm"
+                                Binding="{Binding ProductName}"
+                                Width="1.5*" />
+
+                    <!-- Cột 2: Số lượng -->
+                    <DataGridTextColumn Header="Số lượng"
+                                Binding="{Binding Quantity}"
+                                HeaderStyle="{StaticResource CenterColumnHeaderStyle}"
+                                ElementStyle="{StaticResource CenterCellTextStyle}"
+                                Width="0.8*" />
+
+                    <!-- Cột 3: Đơn giá lúc bán (UnitPrice lưu cứng theo D4) -->
+                    <DataGridTextColumn Header="Đơn Giá"
+                                Binding="{Binding UnitPrice, StringFormat={}{0:N0}đ}"
+                                HeaderStyle="{StaticResource RightColumnHeaderStyle}"
+                                ElementStyle="{StaticResource RightCellTextStyle}"
+                                Width="1.2*" />
+
+                    <!-- Cột 4: Thành tiền (LineTotal = Quantity * UnitPrice) -->
+                    <DataGridTextColumn Header="Thành Tiền"
+                                Binding="{Binding LineTotal, StringFormat={}{0:N0}đ}"
+                                HeaderStyle="{StaticResource RightColumnHeaderStyle}"
+                                ElementStyle="{StaticResource RightCellTextStyle}"
+                                Width="1.2*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        
+        <!-- ====================================================== -->
+        <!-- ROW 2 : CÁC THÔNG TIN TÍNH TIỀN CỦA HÓA ĐƠN -->
+        <!-- ====================================================== -->
+        <Border Grid.Row="2" 
+                Margin="20,0,20,24">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Dòng 1: Subtotal -->
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Tạm tính:"
+                       FontSize="14"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       Margin="0,0,0,8" />
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                       Text="{Binding SubTotal, StringFormat={}{0:N0}đ, FallbackValue='145.000đ'}"
+                       FontSize="14"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       HorizontalAlignment="Right"
+                       Margin="0,0,0,8" />
+
+                <!-- Dòng 2: Discount (Theo quyết định D5: TotalAmount = SubTotal - DiscountAmount) -->
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                       Text="Giảm giá:"
+                       FontSize="14"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       Margin="0,0,0,12" />
+                <TextBlock Grid.Row="1" Grid.Column="1"
+                       Text="{Binding DiscountAmount, StringFormat='-{0:N0}đ', FallbackValue='-14.500đ'}"
+                       FontSize="14"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       HorizontalAlignment="Right"
+                       Margin="0,0,0,12" />
+
+                <!-- Dòng 3: Total Amount (Chữ đậm cỡ 16 theo DESIGN.md) -->
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                       Text="Thành tiền:"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource TextPrimaryBrush}" />
+                <TextBlock Grid.Row="2" Grid.Column="1"
+                       Text="{Binding TotalAmount, StringFormat={}{0:N0}đ, FallbackValue='130.500đ'}"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       HorizontalAlignment="Right" />
+            </Grid>
+        </Border>
+        
+        <!-- ====================================================== -->
+        <!-- ROW 3 : CỤM NÚT -->
+        <!-- ====================================================== -->
+
+        <Grid Grid.Row="3" Margin="20, 0, 20, 24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Xác nhận thanh toán"
+                    Grid.Column="0"
+                    Style="{StaticResource LoginActionButtonStyle}"
+                    Margin="0, 0, 10, 0"></Button>
+
+            <Button Content="Hủy"
+                    Grid.Column="1"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    Margin="10, 0, 0, 0"></Button>
+        </Grid>
         
     </Grid>
 </Window>
