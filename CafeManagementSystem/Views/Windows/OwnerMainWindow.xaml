@@ -58,8 +58,8 @@
                     <!-- Nút 1: Tổng quan Dashboard -->
                     <RadioButton x:Name="NavDashboardBtn"
                                  GroupName="OwnerNavigation"
-                                 IsChecked="True"
-                                 
+                                 IsChecked="{Binding IsDashboardSelected, Mode=TwoWay}"
+                                 Command="{Binding NavigateDashboardCommand}"
                                  Tag="Dashboard"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -71,7 +71,8 @@
                     <!-- Nút 2: Quản lý Thực đơn (Giá bán & Giá vốn) -->
                     <RadioButton x:Name="NavMenuBtn"
                                  GroupName="OwnerNavigation"
-                                 
+                                 IsChecked="{Binding IsMenuSelected, Mode=TwoWay}"
+                                 Command="{Binding NavigateMenuCommand}"
                                  Tag="Menu"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -83,7 +84,8 @@
                     <!-- Nút 3: Lịch sử Hóa đơn -->
                     <RadioButton x:Name="NavInvoicesBtn"
                                  GroupName="OwnerNavigation"
-                                 
+                                 IsChecked="{Binding IsInvoicesSelected, Mode=TwoWay}"
+                                 Command="{Binding NavigateInvoicesCommand}"
                                  Tag="Invoices"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -95,7 +97,8 @@
                     <!-- Nút 4: Quản lý Nhân sự -->
                     <RadioButton x:Name="NavStaffBtn"
                                  GroupName="OwnerNavigation"
-                                 
+                                 IsChecked="{Binding IsStaffSelected, Mode=TwoWay}"
+                                 Command="{Binding NavigateStaffCommand}"
                                  Tag="Staff"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -107,7 +110,8 @@
                     <!-- Nút 5: Ca làm việc & Chấm công -->
                     <RadioButton x:Name="NavShiftsBtn"
                                  GroupName="OwnerNavigation"
-                                 
+                                 IsChecked="{Binding IsShiftsSelected, Mode=TwoWay}"
+                                 Command="{Binding NavigateShiftsCommand}"
                                  Tag="Shifts"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -121,7 +125,8 @@
                 <StackPanel Grid.Row="2" Margin="0,0,0,16">
                     <RadioButton x:Name="NavSettingsBtn"
                                  GroupName="OwnerNavigation"
-                                 
+                                 IsChecked="{Binding IsSettingsSelected, Mode=TwoWay}"
+                                 Command="{Binding NavigateSettingsCommand}"
                                  Tag="Settings"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -141,9 +146,20 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource TextOnDarkBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                            <TextBlock x:Name="OwnerNameDisplay" Text="Trần Chủ Quán" FontSize="13" Foreground="{StaticResource TextOnDarkBrush}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock x:Name="OwnerNameDisplay" 
+                                       Text="{Binding DisplayName, FallbackValue='Trần Chủ Quán'}" 
+                                       FontSize="13" 
+                                       Foreground="{StaticResource TextOnDarkBrush}" 
+                                       VerticalAlignment="Center" 
+                                       TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                        <Button Grid.Column="1" ToolTip="Đăng xuất" Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="4">
+                        <Button Grid.Column="1" 
+                                Command="{Binding LogoutCommand}"
+                                ToolTip="Đăng xuất" 
+                                Background="Transparent" 
+                                BorderThickness="0" 
+                                Cursor="Hand" 
+                                Padding="4">
                             <TextBlock Text="&#xF3B1;" FontFamily="Segoe MDL2 Assets" FontSize="15" Foreground="{StaticResource StatusErrBgBrush}"/>
                         </Button>
                     </Grid>
@@ -154,6 +170,9 @@
         <!-- ================================================ -->
         <!-- CỘT 1: VÙNG NỘI DUNG HIỂN THỊ CÁC MÀN HÌNH CON   -->
         <!-- ================================================ -->
-        <ContentControl x:Name="OwnerContentArea" Grid.Column="1" Margin="0"/>
+        <ContentControl x:Name="OwnerContentArea" 
+                        Grid.Column="1" 
+                        Margin="0"
+                        Content="{Binding CurrentView}"/>
     </Grid>
 </Window>
