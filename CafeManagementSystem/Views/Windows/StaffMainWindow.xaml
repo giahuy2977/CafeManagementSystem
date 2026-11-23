@@ -59,7 +59,7 @@
                     <RadioButton x:Name="NavSalesBtn"
                                  GroupName="StaffNavigation"
                                  IsChecked="True"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Sales"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -71,7 +71,7 @@
                     <!-- Nút 2: Thực đơn (Menu - Chỉ đọc) -->
                     <RadioButton x:Name="NavMenuBtn"
                                  GroupName="StaffNavigation"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Menu"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -83,7 +83,7 @@
                     <!-- Nút 3: Hóa đơn (Invoices) -->
                     <RadioButton x:Name="NavInvoicesBtn"
                                  GroupName="StaffNavigation"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Invoices"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -95,7 +95,7 @@
                     <!-- Nút 4: Chấm công (Attendance) -->
                     <RadioButton x:Name="NavAttendanceBtn"
                                  GroupName="StaffNavigation"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Attendance"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -109,7 +109,7 @@
                 <StackPanel Grid.Row="2" Margin="0,0,0,16">
                     <RadioButton x:Name="NavSettingsBtn"
                                  GroupName="StaffNavigation"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Settings"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -131,7 +131,7 @@
                             <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource TextOnDarkBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
                             <TextBlock x:Name="StaffNameDisplay" Text="Nguyễn Thu Ngân" FontSize="13" Foreground="{StaticResource TextOnDarkBrush}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                        <Button Grid.Column="1" Click="OnLogoutClick" ToolTip="Đăng xuất" Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="4">
+                        <Button Grid.Column="1" ToolTip="Đăng xuất" Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="4">
                             <TextBlock Text="&#xF3B1;" FontFamily="Segoe MDL2 Assets" FontSize="15" Foreground="{StaticResource StatusErrBgBrush}"/>
                         </Button>
                     </Grid>

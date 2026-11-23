@@ -59,7 +59,7 @@
                     <RadioButton x:Name="NavDashboardBtn"
                                  GroupName="OwnerNavigation"
                                  IsChecked="True"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Dashboard"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -71,7 +71,7 @@
                     <!-- Nút 2: Quản lý Thực đơn (Giá bán & Giá vốn) -->
                     <RadioButton x:Name="NavMenuBtn"
                                  GroupName="OwnerNavigation"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Menu"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -83,7 +83,7 @@
                     <!-- Nút 3: Lịch sử Hóa đơn -->
                     <RadioButton x:Name="NavInvoicesBtn"
                                  GroupName="OwnerNavigation"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Invoices"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -95,7 +95,7 @@
                     <!-- Nút 4: Quản lý Nhân sự -->
                     <RadioButton x:Name="NavStaffBtn"
                                  GroupName="OwnerNavigation"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Staff"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -107,7 +107,7 @@
                     <!-- Nút 5: Ca làm việc & Chấm công -->
                     <RadioButton x:Name="NavShiftsBtn"
                                  GroupName="OwnerNavigation"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Shifts"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -121,7 +121,7 @@
                 <StackPanel Grid.Row="2" Margin="0,0,0,16">
                     <RadioButton x:Name="NavSettingsBtn"
                                  GroupName="OwnerNavigation"
-                                 Click="OnNavigateClick"
+                                 
                                  Tag="Settings"
                                  Style="{StaticResource SidebarNavButtonStyle}">
                         <StackPanel Orientation="Horizontal">
@@ -143,7 +143,7 @@
                             <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{StaticResource TextOnDarkBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
                             <TextBlock x:Name="OwnerNameDisplay" Text="Trần Chủ Quán" FontSize="13" Foreground="{StaticResource TextOnDarkBrush}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                        <Button Grid.Column="1" Click="OnLogoutClick" ToolTip="Đăng xuất" Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="4">
+                        <Button Grid.Column="1" ToolTip="Đăng xuất" Background="Transparent" BorderThickness="0" Cursor="Hand" Padding="4">
                             <TextBlock Text="&#xF3B1;" FontFamily="Segoe MDL2 Assets" FontSize="15" Foreground="{StaticResource StatusErrBgBrush}"/>
                         </Button>
                     </Grid>
