@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Settings"
-        Width="1440"
-        Height="900"
+        Width="900"
+        Height="650"
         WindowStartupLocation="CenterScreen"
         FontFamily="Be Vietnam Pro, Segoe UI">
 
