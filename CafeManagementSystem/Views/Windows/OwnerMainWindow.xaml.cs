@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-
+using CafeManagementSystem.Helpers;
 using CafeManagementSystem.Views.UserControls;
 
 namespace CafeManagementSystem.Views
